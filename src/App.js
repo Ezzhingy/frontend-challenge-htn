@@ -11,14 +11,20 @@ import {
   theme,
 } from "@chakra-ui/react";
 
+import { LoginPage } from "./components/LoginPage";
+
+import "./components/constants/Satoshi_Complete/Fonts/WEB/css/satoshi.css";
+
 function App() {
   const colors = {
     base: {
       900: "#1A2026",
+      800: "#30364E",
     },
     blue: {
-      200: "#397696",
-      100: "#62AEDA",
+      300: "#397696",
+      200: "#62AEDA",
+      100: "#84C9F7",
     },
     green: {
       100: "#6CE648",
@@ -31,11 +37,16 @@ function App() {
     },
   };
 
-  const theme = extendTheme({ colors });
+  const fonts = {
+    heading: "Satoshi-Bold",
+    body: "Satoshi-Regular",
+  };
+
+  const theme = extendTheme({ colors, fonts });
 
   return (
     <ChakraProvider theme={theme}>
-      <Box color="yellow.100">hello world oof</Box>
+      <LoginPage />
     </ChakraProvider>
   );
 }
