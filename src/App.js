@@ -1,17 +1,9 @@
-import React from "react";
-import {
-  ChakraProvider,
-  extendTheme,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { LoginPage } from "./components/LoginPage";
+import LoginPage from "./components/LoginPage";
+import DisplayPrivate from "./components/DisplayPrivate";
+import DisplayPublic from "./components/DisplayPublic";
 
 import "./components/constants/Satoshi_Complete/Fonts/WEB/css/satoshi.css";
 
@@ -46,7 +38,13 @@ function App() {
 
   return (
     <ChakraProvider theme={theme}>
-      <LoginPage />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/displayPrivate" element={<DisplayPrivate />} />
+          <Route path="/displayPublic" element={<DisplayPublic />} />
+        </Routes>
+      </BrowserRouter>
     </ChakraProvider>
   );
 }

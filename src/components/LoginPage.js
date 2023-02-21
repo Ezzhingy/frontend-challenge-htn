@@ -1,11 +1,7 @@
 import {
   Box,
   Text,
-  Link,
   VStack,
-  Code,
-  Grid,
-  theme,
   Image,
   HStack,
   FormControl,
@@ -14,10 +10,39 @@ import {
   Center,
   Button,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import leftRibbon from "./constants/left-ribbon.png";
 import rightRibbon from "./constants/right-ribbon.png";
 
-export function LoginPage() {
+export default function LoginPage() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    // Pattern validation was hard-coded in, but if it wasn't, the useStates above can be used to check like so:
+    // For demo sake, username is "admin" and password is "password"
+    if (username === "admin" && password === "password") {
+      navigate("/displayPrivate");
+    }
+  };
+
+  const handleGuestRedirect = () => {
+    navigate("/displayPublic");
+  };
+
   return (
     <Box h="100vh" bg="base.900" pt="10">
       <Box>
@@ -65,59 +90,68 @@ export function LoginPage() {
         />
       </Box>
       <Center mt="10">
-        <VStack spacing="10">
-          <Box>
-            <FormControl isRequired>
-              <FormLabel
+        <form onSubmit={handleFormSubmit}>
+          <VStack spacing="10">
+            <Box>
+              <FormControl isRequired>
+                <FormLabel
+                  color="white"
+                  fontWeight="bold"
+                  fontSize="xs"
+                  fontFamily="sans-serif"
+                >
+                  USERNAME
+                </FormLabel>
+                <Input
+                  placeholder="admin"
+                  type="text"
+                  w={{ lg: "400px", sm: "300px" }}
+                  bg="base.800"
+                  color="grey"
+                  onChange={handleUsernameChange}
+                  pattern="admin"
+                />
+              </FormControl>
+            </Box>
+            <Box>
+              <FormControl isRequired>
+                <FormLabel
+                  color="white"
+                  fontWeight="bold"
+                  fontSize="xs"
+                  fontFamily="sans-serif"
+                >
+                  PASSWORD
+                </FormLabel>
+                <Input
+                  placeholder="password"
+                  type="password"
+                  w={{ lg: "400px", sm: "300px" }}
+                  bg="base.800"
+                  color="grey"
+                  onChange={handlePasswordChange}
+                  pattern="password"
+                />
+              </FormControl>
+            </Box>
+            <Box>
+              <Button
+                bgGradient="linear(to-r, blue.100, blue.200)"
                 color="white"
-                fontWeight="bold"
-                fontSize="xs"
-                fontFamily="sans-serif"
+                px="10"
+                _hover={{ bgGradient: "linear(to-r, blue.200, blue.300)" }}
+                type="submit"
               >
-                USERNAME
-              </FormLabel>
-              <Input
-                placeholder="admin"
-                type="text"
-                w={{ lg: "400px", sm: "300px" }}
-                bg="base.800"
-                color="grey"
-              />
-            </FormControl>
-          </Box>
-          <Box>
-            <FormControl isRequired>
-              <FormLabel
-                color="white"
-                fontWeight="bold"
-                fontSize="xs"
-                fontFamily="sans-serif"
-              >
-                PASSWORD
-              </FormLabel>
-              <Input
-                placeholder="password"
-                type="password"
-                w={{ lg: "400px", sm: "300px" }}
-                bg="base.800"
-                color="grey"
-              />
-            </FormControl>
-          </Box>
-          <Box>
-            <Button
-              bgGradient="linear(to-r, blue.100, blue.200)"
-              color="white"
-              px="10"
-              _hover={{ bgGradient: "linear(to-r, blue.200, blue.300)" }}
-            >
-              Log In
-            </Button>
-          </Box>
-          <Box>
-            <Button px="10">Proceed As Guest</Button>
-          </Box>
-        </VStack>
+                Log In
+              </Button>
+            </Box>
+            <Box>
+              <Button type="button" px="10" onClick={handleGuestRedirect}>
+                Proceed As Guest
+              </Button>
+            </Box>
+          </VStack>
+        </form>
       </Center>
     </Box>
   );
