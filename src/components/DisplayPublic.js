@@ -1,4 +1,4 @@
-import { Box, Button, Image } from "@chakra-ui/react";
+import { Box, Button, Image, Stack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -15,8 +15,43 @@ export default function DisplayPublic() {
     navigate("/");
   };
 
+  const generateEventType = (e) => {
+    let eventType = "";
+    const filteredEvents = [];
+
+    const eventContainer = document.querySelectorAll("#event-container");
+
+    if (e.target.innerText === "Workshop") {
+      eventType = "workshop";
+    } else if (e.target.innerText === "Tech Talk") {
+      eventType = "tech_talk";
+    } else {
+      eventType = null;
+    }
+
+    if (eventType === null) {
+      eventContainer.forEach((event) => {
+        event.style.display = "flex";
+      });
+    } else {
+      for (let i = 0; i < info.length; i++) {
+        if (info[i].event_type === eventType) {
+          filteredEvents.push(i);
+        }
+      }
+
+      eventContainer.forEach((event) => {
+        if (filteredEvents.includes(parseInt(event.dataset.key))) {
+          event.style.display = "flex";
+        } else {
+          event.style.display = "none";
+        }
+      });
+    }
+  };
+
   return (
-    <Box bg="base.900" pt="10" pb="10">
+    <Box bg="base.900" pt="10" pb="10" minH="100vh">
       <Button
         px="5"
         mx="5"
@@ -27,6 +62,38 @@ export default function DisplayPublic() {
       >
         Go Back
       </Button>
+      <Stack
+        direction={["column", "row"]}
+        justifyContent="center"
+        alignItems="center"
+        pl={["0px", "0px", "120px"]}
+      >
+        <Button
+          w="100px"
+          _focus={{ bg: "base.800", color: "white" }}
+          onClick={generateEventType}
+          zIndex="10"
+          _
+        >
+          All
+        </Button>
+        <Button
+          w="100px"
+          _focus={{ bg: "base.800", color: "white" }}
+          onClick={generateEventType}
+          zIndex="10"
+        >
+          Workshop
+        </Button>
+        <Button
+          w="100px"
+          _focus={{ bg: "base.800", color: "white" }}
+          onClick={generateEventType}
+          zIndex="10"
+        >
+          Tech Talk
+        </Button>
+      </Stack>
       <GenerateInfo private={false} setInfo={setInfo} info={info} type={null} />
       <Image
         boxSize="500px"
