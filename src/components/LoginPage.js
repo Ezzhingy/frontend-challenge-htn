@@ -57,11 +57,15 @@ export default function LoginPage() {
         />
         <VStack pt="10">
           <HStack>
-            <Text color="white" fontWeight="bold" fontSize={["2xl", "3xl"]}>
+            <Text
+              color="white"
+              fontWeight="bold"
+              fontSize={["xl", "2xl", "3xl"]}
+            >
               Introducing the
             </Text>
             <Text
-              fontSize={["2xl", "3xl"]}
+              fontSize={["xl", "2xl", "3xl"]}
               bgGradient="linear(to-r, pink.100, yellow.100)"
               fontWeight="bold"
               bgClip="text"

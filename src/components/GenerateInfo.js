@@ -5,6 +5,7 @@ import {
   Text,
   StackDivider,
   Link,
+  Stack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
@@ -77,12 +78,13 @@ export default function GenerateInfo(props) {
     const endDate = timeConverter(event.end_time);
 
     return (
-      <HStack
+      <Stack
         key={index}
+        direction={["column", "column", "row"]}
         spacing="5"
         divider={<StackDivider borderColor="blue.200" />}
       >
-        <Box w="100px">
+        <Box>
           <VStack>
             <Text color="white">{eventDate}</Text>
             <HStack>
@@ -104,7 +106,12 @@ export default function GenerateInfo(props) {
             </HStack>
           </VStack>
         </Box>
-        <VStack bg="base.800" w="600px" borderRadius="12px" p="5">
+        <VStack
+          bg="base.800"
+          w={["300px", "400px", "600px"]}
+          borderRadius="12px"
+          p="5"
+        >
           <VStack textAlign="center">
             <Text
               fontSize="2xl"
@@ -135,7 +142,7 @@ export default function GenerateInfo(props) {
             )}
           </VStack>
         </VStack>
-      </HStack>
+      </Stack>
     );
   }
 
