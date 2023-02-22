@@ -1,5 +1,6 @@
 import { Box, Button, Image } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 import GenerateInfo from "./GenerateInfo";
 
@@ -7,6 +8,7 @@ import party from "./constants/party.svg";
 import party2 from "./constants/party2.svg";
 
 export default function DisplayPublic() {
+  const [info, setInfo] = useState([]);
   const navigate = useNavigate();
 
   const handleLogoutRedirect = () => {
@@ -21,10 +23,11 @@ export default function DisplayPublic() {
         position="fixed"
         right="0"
         onClick={handleLogoutRedirect}
+        zIndex="10"
       >
         Go Back
       </Button>
-      <GenerateInfo private={false} />
+      <GenerateInfo private={false} setInfo={setInfo} info={info} type={null} />
       <Image
         boxSize="500px"
         objectFit="contain"

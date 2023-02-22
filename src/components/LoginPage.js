@@ -53,7 +53,7 @@ export default function LoginPage() {
           alt="Left Ribbon"
           position="absolute"
           top="-10"
-          opacity={[0.3, 1]}
+          opacity={[0.3, 0.3, 0.3, 1]}
         />
         <VStack pt="10">
           <HStack>
@@ -90,7 +90,7 @@ export default function LoginPage() {
           position="absolute"
           top="-10"
           right="0"
-          opacity={[0.3, 1]}
+          opacity={[0.3, 0.3, 0.3, 1]}
         />
       </Box>
       <Center mt="10">

@@ -7,11 +7,9 @@ import {
   Link,
   Stack,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function GenerateInfo(props) {
-  const [info, setInfo] = useState([]);
-
   useEffect(() => {
     async function getEvents() {
       try {
@@ -26,12 +24,16 @@ export default function GenerateInfo(props) {
         eventsResult.sort((a, b) => {
           if (a.start_time < b.start_time) {
             return -1;
+          } else if (a.start_time > b.start_time) {
+            return 1;
+          } else if (a.end_time < b.end_time) {
+            return -1;
           } else {
             return 1;
           }
         });
 
-        setInfo(eventsResult);
+        props.setInfo(eventsResult);
       } catch (err) {
         console.log(err);
       }
@@ -79,12 +81,14 @@ export default function GenerateInfo(props) {
 
     return (
       <Stack
+        id="event-container"
         key={index}
+        data-key={index}
         direction={["column", "column", "row"]}
         spacing="5"
         divider={<StackDivider borderColor="blue.200" />}
       >
-        <Box>
+        <Box w={["auto", "auto", "100px"]}>
           <VStack>
             <Text color="white">{eventDate}</Text>
             <HStack>
@@ -147,9 +151,9 @@ export default function GenerateInfo(props) {
   }
 
   return (
-    <Box mt="20">
+    <Box mt="10">
       <VStack spacing="5">
-        {info.map((event, index) => {
+        {props.info.map((event, index) => {
           if (props.private) {
             return outputInfo(event, index);
           } else if (event.permission === "public") {
