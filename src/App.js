@@ -1,5 +1,6 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 
 import LoginPage from "./components/LoginPage";
 import DisplayPrivate from "./components/DisplayPrivate";
@@ -39,12 +40,24 @@ function App() {
 
   const theme = extendTheme({ colors, fonts });
 
+  const [loggedIn, setLoggedIn] = useState(false);
+
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/displayPrivate" element={<DisplayPrivate />} />
+          <Route
+            path="/"
+            element={
+              <LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+            }
+          />
+          <Route
+            path="/displayPrivate"
+            element={
+              <DisplayPrivate loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+            }
+          />
           <Route path="/displayPublic" element={<DisplayPublic />} />
         </Routes>
       </BrowserRouter>

@@ -1,13 +1,13 @@
 import { Box, Button, Image, Stack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import GenerateInfo from "./GenerateInfo";
 
 import party from "./constants/party.svg";
 import party2 from "./constants/party2.svg";
 
-export default function DisplayPrivate() {
+export default function DisplayPrivate(props) {
   const [info, setInfo] = useState([]);
 
   const navigate = useNavigate();
@@ -43,6 +43,7 @@ export default function DisplayPrivate() {
         }
       }
 
+      // uses data-key to identify appropriate event
       eventContainer.forEach((event) => {
         if (filteredEvents.includes(parseInt(event.dataset.key))) {
           event.style.display = "flex";
@@ -52,6 +53,13 @@ export default function DisplayPrivate() {
       });
     }
   };
+
+  // if user is not logged in, forces them back to login page
+  useEffect(() => {
+    if (!props.loggedIn) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <Box bg="base.900" pt="10" pb="10">
@@ -76,6 +84,7 @@ export default function DisplayPrivate() {
       >
         <Button
           w="100px"
+          bg="lightgray"
           _focus={{ bg: "base.800", color: "white" }}
           onClick={generateEventType}
           zIndex="10"
@@ -84,6 +93,7 @@ export default function DisplayPrivate() {
         </Button>
         <Button
           w="100px"
+          bg="lightgray"
           _focus={{ bg: "base.800", color: "white" }}
           onClick={generateEventType}
           zIndex="10"
@@ -92,6 +102,7 @@ export default function DisplayPrivate() {
         </Button>
         <Button
           w="100px"
+          bg="lightgray"
           _focus={{ bg: "base.800", color: "white" }}
           onClick={generateEventType}
           zIndex="10"
@@ -100,6 +111,7 @@ export default function DisplayPrivate() {
         </Button>
         <Button
           w="100px"
+          bg="lightgray"
           _focus={{ bg: "base.800", color: "white" }}
           onClick={generateEventType}
           zIndex="10"

@@ -40,6 +40,7 @@ export default function DisplayPublic() {
         }
       }
 
+      // uses data-key to identify appropriate event
       eventContainer.forEach((event) => {
         if (filteredEvents.includes(parseInt(event.dataset.key))) {
           event.style.display = "flex";
@@ -70,6 +71,7 @@ export default function DisplayPublic() {
       >
         <Button
           w="100px"
+          bg="lightgray"
           _focus={{ bg: "base.800", color: "white" }}
           onClick={generateEventType}
           zIndex="10"
@@ -78,6 +80,7 @@ export default function DisplayPublic() {
         </Button>
         <Button
           w="100px"
+          bg="lightgray"
           _focus={{ bg: "base.800", color: "white" }}
           onClick={generateEventType}
           zIndex="10"
@@ -86,6 +89,7 @@ export default function DisplayPublic() {
         </Button>
         <Button
           w="100px"
+          bg="lightgray"
           _focus={{ bg: "base.800", color: "white" }}
           onClick={generateEventType}
           zIndex="10"

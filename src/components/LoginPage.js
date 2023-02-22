@@ -10,12 +10,12 @@ import {
   Center,
   Button,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import leftRibbon from "./constants/left-ribbon.png";
 import rightRibbon from "./constants/right-ribbon.png";
 
-export default function LoginPage() {
+export default function LoginPage(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -36,12 +36,18 @@ export default function LoginPage() {
     // For demo sake, username is "admin" and password is "password"
     if (username === "admin" && password === "password") {
       navigate("/displayPrivate");
+      props.setLoggedIn(true);
     }
   };
 
   const handleGuestRedirect = () => {
     navigate("/displayPublic");
   };
+
+  // When user logs out, automatically sets loggedIn to false to prevent route manipulation
+  useEffect(() => {
+    props.setLoggedIn(false);
+  }, []);
 
   return (
     <Box h="100vh" bg="base.900" pt="10">
