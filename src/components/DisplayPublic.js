@@ -73,7 +73,6 @@ export default function DisplayPublic() {
           _focus={{ bg: "base.800", color: "white" }}
           onClick={generateEventType}
           zIndex="10"
-          _
         >
           All
         </Button>

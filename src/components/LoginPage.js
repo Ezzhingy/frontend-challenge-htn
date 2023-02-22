@@ -47,6 +47,7 @@ export default function LoginPage() {
     <Box h="100vh" bg="base.900" pt="10">
       <Box>
         <Image
+          className="animate__animated animate__tada"
           boxSize="400px"
           objectFit="contain"
           src={leftRibbon}
@@ -78,11 +79,13 @@ export default function LoginPage() {
             bgGradient="linear(to-r, green.100, blue.200)"
             fontWeight="extrabold"
             bgClip="text"
+            className="animate__animated animate__tada"
           >
             Events
           </Text>
         </VStack>
         <Image
+          className="animate__animated animate__tada"
           boxSize="400px"
           objectFit="contain"
           src={rightRibbon}
