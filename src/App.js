@@ -1,5 +1,5 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
 import LoginPage from "./components/LoginPage";
@@ -44,7 +44,7 @@ function App() {
 
   return (
     <ChakraProvider theme={theme}>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route
             path="/"
@@ -60,7 +60,7 @@ function App() {
           />
           <Route path="/displayPublic" element={<DisplayPublic />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </ChakraProvider>
   );
 }
